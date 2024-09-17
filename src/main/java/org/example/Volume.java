@@ -23,4 +23,18 @@ public class Volume{
 
         return new Volume(value / 1000, "l");
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Volume volume = (Volume) obj;
+        return Objects.equals(value, volume.value) && Objects.equals(unit, volume.unit);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value, unit);
+    }
 }
