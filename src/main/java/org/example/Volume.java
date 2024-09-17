@@ -5,11 +5,11 @@ import java.util.Objects;
 public class Volume{
     // to convert liter to milliliters
     private final Double value;
-    private final String unit;
+    private final Units unit;
 
 
 
-    public Volume(double value, String unit) throws Exception {
+    public Volume(double value, Units unit) throws Exception {
         if (value <= 0) {
             throw new Exception("Input should be a non zero positive value");
         }
@@ -17,11 +17,10 @@ public class Volume{
         this.unit = unit;
     }
 
-    public Volume convert() throws Exception {
-        if (unit == "l")
-            return new Volume(value * 1000, "ml");
-
-        return new Volume(value / 1000, "l");
+    public double convert(String toUnit) throws Exception {
+        Units outputUnit = Units.valueOf(toUnit);
+        double valueInLiters = unit.toLiter(value);
+        return outputUnit.fromLiter(valueInLiters);
     }
 
     @Override
