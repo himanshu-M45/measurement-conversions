@@ -1,59 +1,48 @@
 package org.example;
 
-import java.util.Objects;
+public enum Unit {
+    // Volume Units
+    L(1.0, MeasurementType.VOLUME),
+    DL(0.1, MeasurementType.VOLUME),
+    CL(0.01, MeasurementType.VOLUME),
+    ML(0.001, MeasurementType.VOLUME),
+    KL(1000.0, MeasurementType.VOLUME),
 
-public class Unit {
-    // to convert liter to milliliters
-    private final Double value;
-    private final Units unit;
+    // Length Units
+    M(1.0, MeasurementType.LENGTH),
+    CM(0.01, MeasurementType.LENGTH),
+    MM(0.001, MeasurementType.LENGTH),
+    KM(1000.0, MeasurementType.LENGTH),
 
 
+    // Mass Units
+    G(1.0, MeasurementType.MASS),
+    MG(0.001, MeasurementType.MASS),
+    KG(1000.0, MeasurementType.MASS);
 
-    public Unit(double value, Units unit) throws Exception {
-        if (value <= 0) {
-            throw new Exception("Input should be a non zero positive value");
-        }
-        this.value = value;
-        this.unit = unit;
+    private final double currentUnit;
+    private final MeasurementType measurementType;
+
+    Unit(double currentUnit, MeasurementType measurementType) {
+        this.currentUnit = currentUnit;
+        this.measurementType = measurementType;
     }
 
-    public Unit convert(Units toUnit) throws Exception {
-        if (this.unit.getUnitType() != toUnit.getUnitType()) {
-            throw new Exception("Cannot convert between different Units");
-        }
-        double valueInBaseUnit = unit.toBaseUnit() * value;
-        return new Unit(toUnit.fromBaseUnit() * valueInBaseUnit, toUnit);
+    public double toBaseUnit() {
+        return currentUnit;
     }
 
-    public Unit add(Unit otherUnit, Units resultUnit) throws Exception {
-        if (this.unit.getUnitType() != resultUnit.getUnitType() && this.unit.getUnitType() != otherUnit.unit.getUnitType()) {
-            throw new Exception("Cannot convert between different Units");
-        }
-
-        // convert both units to base unit
-        double currentValueInBaseUnit = unit.toBaseUnit() * value;
-        double otherUnitInBaseUnit = otherUnit.unit.toBaseUnit() * otherUnit.value;
-
-        // sum in base unit
-        double sumInBaseUnit = currentValueInBaseUnit + otherUnitInBaseUnit;
-
-        // convert the sum to target unit
-        double resultValue = sumInBaseUnit * resultUnit.fromBaseUnit();
-
-        return new Unit(resultValue, resultUnit);
+    public double fromBaseUnit() {
+        return 1 / currentUnit;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        Unit unit = (Unit) obj;
-        return Objects.equals(value, unit.value) && Objects.equals(this.unit, unit.unit);
+    public MeasurementType getUnitType() {
+        return measurementType;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(value, unit);
+    public enum MeasurementType {
+        VOLUME,
+        LENGTH,
+        MASS,
     }
 }
