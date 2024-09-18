@@ -2,14 +2,14 @@ package org.example;
 
 import java.util.Objects;
 
-public class Volume{
+public class Unit {
     // to convert liter to milliliters
     private final Double value;
-    private final VolumeUnit unit;
+    private final Units unit;
 
 
 
-    public Volume(double value, VolumeUnit unit) throws Exception {
+    public Unit(double value, Units unit) throws Exception {
         if (value <= 0) {
             throw new Exception("Input should be a non zero positive value");
         }
@@ -17,9 +17,12 @@ public class Volume{
         this.unit = unit;
     }
 
-    public double convert(VolumeUnit toUnit) throws Exception {
+    public Unit convert(Units toUnit) throws Exception {
+        if (this.unit.getUnitType() != toUnit.getUnitType()) {
+            throw new Exception("Cannot convert between different Units");
+        }
         double valueInBaseUnit = unit.toBaseUnit() * value;
-        return toUnit.fromBaseUnit() * valueInBaseUnit;
+        return new Unit(toUnit.fromBaseUnit() * valueInBaseUnit, toUnit);
     }
 
     @Override
@@ -27,8 +30,8 @@ public class Volume{
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        Volume volume = (Volume) obj;
-        return Objects.equals(value, volume.value) && Objects.equals(unit, volume.unit);
+        Unit unit = (Unit) obj;
+        return Objects.equals(value, unit.value) && Objects.equals(this.unit, unit.unit);
     }
 
     @Override
