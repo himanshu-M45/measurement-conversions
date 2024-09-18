@@ -147,13 +147,60 @@ class UnitTest {
         assertEquals(expected, actual);
     }
 
+    // unit test to check how function responds to different conversion types
     @Test
-    void testOneLiterToOneCentimeters() throws Exception {
+    void testConvertOneLiterToOneCentimeters() throws Exception {
         Unit liter = new Unit(1.0, Units.L);
 
-        Exception exception = assertThrows(Exception.class, () -> {
-            liter.convert(Units.CM);
-        });
+        Exception exception = assertThrows(Exception.class, () -> {liter.convert(Units.CM);});
+
+        assertEquals("Cannot convert between different Units", exception.getMessage());
+    }
+
+    @Test
+    void testAddOneMilliliterToOneLiter() throws Exception {
+        Unit expected = new Unit(1.001, Units.L);
+
+        Unit liter = new Unit(1.0, Units.L);
+        Unit milliliter = new Unit(1.0, Units.ML);
+
+        Unit actual = liter.add(milliliter, Units.L);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testAddFiveHundredMetersToOneKilometers() throws Exception {
+        Unit expected = new Unit(1.5, Units.KM);
+
+        Unit kilometer = new Unit(1.0, Units.KM);
+        Unit meter = new Unit(500.0, Units.M);
+
+        Unit actual = kilometer.add(meter, Units.KM);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testAddSevenHundredGramToOneKilogram() throws Exception {
+        Unit expected = new Unit(1.7, Units.KG);
+
+        Unit kilogram = new Unit(1, Units.KG);
+        Unit gram = new Unit(700.0, Units.G);
+
+        Unit actual = kilogram.add(gram, Units.KG);
+
+        assertEquals(expected, actual);
+    }
+
+    // unit test to check how function responds to different conversion types
+    @Test
+    void testAddOneLiterToOneCentimeters() throws Exception {
+        Unit liter = new Unit(1.0, Units.L);
+        Unit centimeters = new Unit(1.0, Units.CM);
+
+        Exception exception = assertThrows(Exception.class, () -> {liter.add(centimeters, Units.CM);});
+
         assertEquals("Cannot convert between different Units", exception.getMessage());
     }
 }
