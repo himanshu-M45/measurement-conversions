@@ -18,44 +18,41 @@ public class Measurement {
     }
 
     public Measurement convert(Unit toUnit) throws Exception {
-        if (this.unit.getUnitType() != toUnit.getUnitType()) {
-            throw new Exception("Different types of measurements");
-        }
+        validateMeasurementType(toUnit);
         double valueInBaseUnit = unit.toBaseUnit() * value;
         return new Measurement(toUnit.fromBaseUnit() * valueInBaseUnit, toUnit);
     }
 
-    public Measurement add(Measurement additionAmount) throws Exception {
-        if (this.unit.getUnitType() != additionAmount.unit.getUnitType()) {
-            throw new Exception("Different types of measurements");
-        }
+    public Measurement add(Measurement additionValue) throws Exception {
+        validateMeasurementType(additionValue.unit);
 
-        // convert additionAmount into same unit type as calling object
-        Measurement convertedAdditionValue = additionAmount.convert(this.unit);
+        // convert additionValue into same unit type as calling object
+        Measurement convertAdditionValueInBaseUnit = additionValue.convert(this.unit);
 
-        return new Measurement(this.value + convertedAdditionValue.value, this.unit);
+        return new Measurement(this.value + convertAdditionValueInBaseUnit.value, this.unit);
     }
 
-    public Measurement sub(Measurement subtractionAmount) throws Exception {
-        if (this.unit.getUnitType() != subtractionAmount.unit.getUnitType()) {
-            throw new Exception("Different types of measurements");
-        }
+    public Measurement sub(Measurement subtractionValue) throws Exception {
+        validateMeasurementType(subtractionValue.unit);
 
-        // convert subtractionAmount into same unit type as calling object
-        Measurement convertedSubtractionValue = subtractionAmount.convert(this.unit);
+        // convert subtractionValue into same unit type as calling object
+        Measurement convertSubtractionValueInBaseUnit = subtractionValue.convert(this.unit);
 
-        return new Measurement(this.value - convertedSubtractionValue.value, this.unit);
+        return new Measurement(this.value - convertSubtractionValueInBaseUnit.value, this.unit);
     }
 
     public int compare(Measurement compareTo) throws Exception {
-        if (this.unit.getUnitType() != compareTo.unit.getUnitType()) {
-            throw new Exception("Different types of measurements");
-        }
+        validateMeasurementType(compareTo.unit);
 
         // convert compareTo unit value into base unit value
         Measurement convertCompareToInBaseUnit = compareTo.convert(this.unit);
 
         return Double.compare(this.value, convertCompareToInBaseUnit.value);
+    }
+
+    private void validateMeasurementType(Unit measurementType) throws Exception {
+        if (this.unit.getUnitType() != measurementType.getUnitType())
+            throw new Exception("Different types of measurements");
     }
 
     @Override

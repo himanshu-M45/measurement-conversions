@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MeasurementTest {
+    // test for volume unit
     @Test
     void testOneLiterToOneThousandMilliliters() throws Exception {
         Measurement expected = new Measurement(0.001, Unit.KL);
@@ -164,6 +165,7 @@ class MeasurementTest {
         assertEquals("Different types of measurements", exception.getMessage());
     }
 
+    // volume measurement type
     @Test
     void testAddOneMilliliterToOneLiter() throws Exception {
         Measurement expected = new Measurement(1.001, Unit.L);
@@ -200,6 +202,7 @@ class MeasurementTest {
         assertEquals(expected, actual);
     }
 
+    // length measurement type
     @Test
     void testAddFiveHundredMetersToOneKilometers() throws Exception {
         Measurement expected = new Measurement(1.5, Unit.KM);
@@ -224,6 +227,7 @@ class MeasurementTest {
         assertEquals(expected, actual);
     }
 
+    // mass measurement type
     @Test
     void testAddSevenHundredGramToOneKilogram() throws Exception {
         Measurement expected = new Measurement(1.07, Unit.KG);
@@ -260,6 +264,7 @@ class MeasurementTest {
         assertEquals("Different types of measurements", exception.getMessage());
     }
 
+    // volume measurement type
     @Test
     void testSubOneMilliliterFromOneLiter() throws Exception {
         Measurement expected = new Measurement(0.5, Unit.L);
@@ -272,6 +277,7 @@ class MeasurementTest {
         assertEquals(expected, actual);
     }
 
+    // length measurement type
     @Test
     void testSubFiveHundredMetersFromOneKilometers() throws Exception {
         Measurement expected = new Measurement(0.5, Unit.KM);
@@ -320,6 +326,7 @@ class MeasurementTest {
         assertEquals(expected, actual);
     }
 
+    // mass measurement type
     @Test
     void testSubTenKilogramFromFifteenThousandGrams() throws Exception {
         Measurement expected = new Measurement(5000.0, Unit.G);
@@ -361,6 +368,7 @@ class MeasurementTest {
         assertEquals("Different types of measurements", exception.getMessage());
     }
 
+    // volume measurement type
     @Test
     void testCompareOneLiterToOneThousandMilliliter() throws Exception {
         int expected = 0; // 1000ML == 1.0L
@@ -373,6 +381,7 @@ class MeasurementTest {
         assertEquals(expected, actual);
     }
 
+    // mass measurement type
     @Test
     void testCompareOneThousandFiveHundredGramToOneKilogram() throws Exception {
         int expected = -1; // 1500G > 1KG
@@ -385,6 +394,7 @@ class MeasurementTest {
         assertEquals(expected, actual);
     }
 
+    // length measurement type
     @Test
     void testCompareOneMeterToOneHundredCentimeter() throws Exception {
         int expected = 1; // 1.0M < 2000CM
