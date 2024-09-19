@@ -161,7 +161,7 @@ class MeasurementTest {
 
         Exception exception = assertThrows(Exception.class, () -> {liter.add(centimeters);});
 
-        assertEquals("Cannot convert between different Units", exception.getMessage());
+        assertEquals("Different types of measurements", exception.getMessage());
     }
 
     @Test
@@ -257,7 +257,7 @@ class MeasurementTest {
 
         Exception exception = assertThrows(Exception.class, () -> {liter.sub(centimeters);});
 
-        assertEquals("Cannot convert between different Units", exception.getMessage());
+        assertEquals("Different types of measurements", exception.getMessage());
     }
 
     @Test
@@ -358,7 +358,7 @@ class MeasurementTest {
 
         Exception exception = assertThrows(Exception.class, () -> {liter.compare(centimeters);});
 
-        assertEquals("Cannot convert between different Units", exception.getMessage());
+        assertEquals("Different types of measurements", exception.getMessage());
     }
 
     @Test

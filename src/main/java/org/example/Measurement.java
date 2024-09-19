@@ -27,7 +27,7 @@ public class Measurement {
 
     public Measurement add(Measurement additionAmount) throws Exception {
         if (this.unit.getUnitType() != additionAmount.unit.getUnitType()) {
-            throw new Exception("Cannot convert between different Units");
+            throw new Exception("Different types of measurements");
         }
 
         // convert additionAmount into base unit
@@ -41,7 +41,7 @@ public class Measurement {
 
     public Measurement sub(Measurement subtractionAmount) throws Exception {
         if (this.unit.getUnitType() != subtractionAmount.unit.getUnitType()) {
-            throw new Exception("Cannot convert between different Units");
+            throw new Exception("Different types of measurements");
         }
 
         // convert subtractionAmount into base unit
@@ -55,7 +55,7 @@ public class Measurement {
 
     public int compare(Measurement compareTo) throws Exception {
         if (this.unit.getUnitType() != compareTo.unit.getUnitType()) {
-            throw new Exception("Cannot convert between different Units");
+            throw new Exception("Different types of measurements");
         }
 
         // convert compareTo unit value into base unit value
