@@ -30,13 +30,10 @@ public class Measurement {
             throw new Exception("Different types of measurements");
         }
 
-        // convert additionAmount into base unit
-        double additionAmountInBaseUnit = additionAmount.unit.toBaseUnit() * additionAmount.value;
+        // convert additionAmount into same unit type as calling object
+        Measurement convertedAdditionValue = additionAmount.convert(this.unit);
 
-        // result
-        double resultantSumValue = (unit.toBaseUnit() * value + additionAmountInBaseUnit) * this.unit.fromBaseUnit();
-
-        return new Measurement(resultantSumValue, this.unit);
+        return new Measurement(this.value + convertedAdditionValue.value, this.unit);
     }
 
     public Measurement sub(Measurement subtractionAmount) throws Exception {
@@ -44,13 +41,10 @@ public class Measurement {
             throw new Exception("Different types of measurements");
         }
 
-        // convert subtractionAmount into base unit
-        double subtractionAmountInBaseUnit = subtractionAmount.unit.toBaseUnit() * subtractionAmount.value;
+        // convert subtractionAmount into same unit type as calling object
+        Measurement convertedSubtractionValue = subtractionAmount.convert(this.unit);
 
-        // result
-        double resultantSubValue = (unit.toBaseUnit() * value - subtractionAmountInBaseUnit) * this.unit.fromBaseUnit();
-
-        return new Measurement(resultantSubValue, this.unit);
+        return new Measurement(this.value - convertedSubtractionValue.value, this.unit);
     }
 
     public int compare(Measurement compareTo) throws Exception {

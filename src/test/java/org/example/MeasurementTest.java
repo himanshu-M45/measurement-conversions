@@ -226,10 +226,10 @@ class MeasurementTest {
 
     @Test
     void testAddSevenHundredGramToOneKilogram() throws Exception {
-        Measurement expected = new Measurement(1.7, Unit.KG);
+        Measurement expected = new Measurement(1.07, Unit.KG);
 
         Measurement kilogram = new Measurement(1, Unit.KG);
-        Measurement gram = new Measurement(700.0, Unit.G);
+        Measurement gram = new Measurement(70.0, Unit.G);
 
         Measurement actual = kilogram.add(gram);
 
