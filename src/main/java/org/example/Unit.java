@@ -18,22 +18,26 @@ public enum Unit {
     // Mass Units
     G(1.0, MeasurementType.MASS),
     MG(0.001, MeasurementType.MASS),
-    KG(1000.0, MeasurementType.MASS);
+    KG(1000.0, MeasurementType.MASS),
 
-    private final double currentUnit;
+    // Temperature Units
+    CELSIUS(1.0, MeasurementType.TEMPERATURE),
+    FAHRENHEIT(1.0, MeasurementType.TEMPERATURE);
+
+    private final double conversionFactor;
     private final MeasurementType measurementType;
 
-    Unit(double currentUnit, MeasurementType measurementType) {
-        this.currentUnit = currentUnit;
+    Unit(double conversionFactor, MeasurementType measurementType) {
+        this.conversionFactor = conversionFactor;
         this.measurementType = measurementType;
     }
 
     public double toBaseUnit() {
-        return currentUnit;
+        return conversionFactor;
     }
 
     public double fromBaseUnit() {
-        return 1 / currentUnit;
+        return 1 / conversionFactor;
     }
 
     public MeasurementType getUnitType() {
@@ -44,5 +48,6 @@ public enum Unit {
         VOLUME,
         LENGTH,
         MASS,
+        TEMPERATURE,
     }
 }

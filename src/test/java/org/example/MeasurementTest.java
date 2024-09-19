@@ -359,7 +359,7 @@ class MeasurementTest {
     */
     // unit test to check how function responds to different Measurement types of comparison
     @Test
-    void testCompareOneLiterToOneCentimeters() throws Exception {
+    void testCompareOneLiterWithOneCentimeters() throws Exception {
         Measurement liter = new Measurement(1.0, Unit.L);
         Measurement centimeters = new Measurement(1.0, Unit.CM);
 
@@ -370,7 +370,7 @@ class MeasurementTest {
 
     // volume measurement type
     @Test
-    void testCompareOneLiterToOneThousandMilliliter() throws Exception {
+    void testCompareOneLiterWithOneThousandMilliliter() throws Exception {
         int expected = 0; // 1000ML == 1.0L
 
         Measurement milliliter = new Measurement(1000.0, Unit.ML);
@@ -383,7 +383,7 @@ class MeasurementTest {
 
     // mass measurement type
     @Test
-    void testCompareOneThousandFiveHundredGramToOneKilogram() throws Exception {
+    void testCompareOneThousandFiveHundredGramWithOneKilogram() throws Exception {
         int expected = -1; // 1500G > 1KG
 
         Measurement kilogram = new Measurement(1.0, Unit.KG);
@@ -396,13 +396,104 @@ class MeasurementTest {
 
     // length measurement type
     @Test
-    void testCompareOneMeterToOneHundredCentimeter() throws Exception {
+    void testCompareOneMeterWithOneHundredCentimeter() throws Exception {
         int expected = 1; // 1.0M < 2000CM
 
         Measurement centimeter = new Measurement(2000.0, Unit.CM);
         Measurement meter = new Measurement(1.0, Unit.M);
 
         int actual = centimeter.compare(meter);
+
+        assertEquals(expected, actual);
+    }
+
+    // temperature type unit tests
+    @Test
+    void testConvertTenCelsiusToFiftyFahrenheit() throws Exception {
+        Measurement expected = new Measurement(50.0, Unit.FAHRENHEIT);
+        Measurement fahrenheit = new Measurement(10.0, Unit.CELSIUS);
+
+        Measurement actual = fahrenheit.convert(Unit.FAHRENHEIT);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testConvertEightySixFahrenheitToThirtyCelsius() throws Exception {
+        Measurement expected = new Measurement(30.0, Unit.CELSIUS);
+        Measurement fahrenheit = new Measurement(86.0, Unit.FAHRENHEIT);
+
+        Measurement actual = fahrenheit.convert(Unit.CELSIUS);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testConvertTenFahrenheitToCelsius() throws Exception { // expecting negative output
+        Measurement expected = new Measurement(-12.222222222222221, Unit.CELSIUS);
+        Measurement fahrenheit = new Measurement(10.0, Unit.FAHRENHEIT);
+
+        Measurement actual = fahrenheit.convert(Unit.CELSIUS);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testAddThirtyCelsiusToEightySixFahrenheit() throws Exception {
+        Measurement expected = new Measurement(172.0, Unit.FAHRENHEIT);
+
+        Measurement fahrenheit = new Measurement(86.0, Unit.FAHRENHEIT);
+        Measurement celsius = new Measurement(30.0, Unit.CELSIUS);
+
+        Measurement actual = fahrenheit.add(celsius);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testAddThirtyFahrenheitToEightySixCelsius() throws Exception {
+        Measurement expected = new Measurement(45.0, Unit.CELSIUS);
+
+        Measurement celsius = new Measurement(30.0, Unit.CELSIUS);
+        Measurement fahrenheit = new Measurement(59.0, Unit.FAHRENHEIT);
+
+        Measurement actual = celsius.add(fahrenheit);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testSubThirtyCelsiusFromEightySixFahrenheit() throws Exception {
+        Measurement expected = new Measurement(0.0, Unit.FAHRENHEIT);
+
+        Measurement fahrenheit = new Measurement(86.0, Unit.FAHRENHEIT);
+        Measurement celsius = new Measurement(30.0, Unit.CELSIUS);
+
+        Measurement actual = fahrenheit.sub(celsius);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testSubFiftyNineFahrenheitFromThirtyCelsius() throws Exception {
+        Measurement expected = new Measurement(15.0, Unit.CELSIUS);
+
+        Measurement celsius = new Measurement(30.0, Unit.CELSIUS);
+        Measurement fahrenheit = new Measurement(59.0, Unit.FAHRENHEIT);
+
+        Measurement actual = celsius.sub(fahrenheit);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testCompareFiftyNineFahrenheitWithFifteenCelsius() throws Exception {
+        int expected = 0; // 15C == 59F
+
+        Measurement celsius = new Measurement(15.0, Unit.CELSIUS);
+        Measurement fahrenheit = new Measurement(59.0, Unit.FAHRENHEIT);
+
+        int actual = celsius.compare(fahrenheit);
 
         assertEquals(expected, actual);
     }

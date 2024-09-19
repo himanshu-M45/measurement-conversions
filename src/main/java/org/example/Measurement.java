@@ -10,7 +10,7 @@ public class Measurement {
 
 
     public Measurement(double value, Unit unit) throws Exception {
-        if (value < 0) {
+        if (value < 0 && unit.getUnitType() != Unit.MeasurementType.TEMPERATURE) {
             throw new Exception("Input should be a non zero positive value");
         }
         this.value = value;
@@ -19,6 +19,15 @@ public class Measurement {
 
     public Measurement convert(Unit toUnit) throws Exception {
         validateMeasurementType(toUnit);
+
+        // temperature conversion
+        if (this.unit.getUnitType() == Unit.MeasurementType.TEMPERATURE) {
+            if (toUnit == Unit.CELSIUS) {
+                return new Measurement((this.value - 32) * 5 / 9, toUnit); // F -> C
+            }
+            return new Measurement((value * 9 / 5) + 32, toUnit); // C -> F
+        }
+
         double valueInBaseUnit = unit.toBaseUnit() * value;
         return new Measurement(toUnit.fromBaseUnit() * valueInBaseUnit, toUnit);
     }

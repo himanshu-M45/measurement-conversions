@@ -54,4 +54,17 @@ class UnitTest {
         assertEquals(expected, unit.getUnitType());
     }
 
+    @Test
+    void testTemperatureCelsiusToBaseUnit() {
+        double expected = 1.0;
+        Unit celsius = Unit.CELSIUS;
+        assertEquals(expected, celsius.fromBaseUnit());
+    }
+
+    @Test
+    void testTemperatureFahrenheitToBaseUnit() {
+        double expected = 1.0;
+        Unit fahrenheit = Unit.FAHRENHEIT;
+        assertEquals(expected, fahrenheit.fromBaseUnit());
+    }
 }
