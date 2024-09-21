@@ -1,12 +1,9 @@
 package org.example.implementation;
 
 import org.example.enums.VolumeUnit;
-import org.example.enums.WeightUnit;
 import org.example.interfaces.Measurable;
 
-import java.util.Objects;
-
-public class Volume extends AbstractMeasurable<VolumeUnit> {
+public class Volume extends Measurement<VolumeUnit> {
     public Volume(double value, VolumeUnit unit) throws IllegalAccessException {
         super(value, unit);
     }

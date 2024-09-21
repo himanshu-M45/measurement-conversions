@@ -5,11 +5,11 @@ import org.example.interfaces.Measurable;
 
 import java.util.Objects;
 
-public abstract class AbstractMeasurable<T extends Enum<T>> implements Measurable {
+public abstract class Measurement<T extends Enum<T>> implements Measurable {
     protected double value;
     protected T unit;
 
-    public AbstractMeasurable(double value, T unit) throws IllegalAccessException {
+    public Measurement(double value, T unit) throws IllegalAccessException {
         if (value < 0 && !(unit instanceof TemperatureUnit)) {
             throw new IllegalAccessException("Value cannot be negative");
         }
@@ -26,22 +26,22 @@ public abstract class AbstractMeasurable<T extends Enum<T>> implements Measurabl
 
     @Override
     public Measurable add(Measurable additionValue) throws Exception {
-        AbstractMeasurable<?> measurableToAdd = (AbstractMeasurable<?>) additionValue;
-        AbstractMeasurable<?> convertedValue = (AbstractMeasurable<?>) measurableToAdd.convert(this.unit);
+        Measurement<?> measurableToAdd = (Measurement<?>) additionValue;
+        Measurement<?> convertedValue = (Measurement<?>) measurableToAdd.convert(this.unit);
         return createInstance(this.value + convertedValue.value, this.unit);
     }
 
     @Override
     public Measurable sub(Measurable subtractionValue) throws Exception {
-        AbstractMeasurable<?> measurableToSub = (AbstractMeasurable<?>) subtractionValue;
-        AbstractMeasurable<?> convertedValue = (AbstractMeasurable<?>) measurableToSub.convert(this.unit);
+        Measurement<?> measurableToSub = (Measurement<?>) subtractionValue;
+        Measurement<?> convertedValue = (Measurement<?>) measurableToSub.convert(this.unit);
         return createInstance(this.value - convertedValue.value, this.unit);
     }
 
     @Override
     public int compare(Measurable compareTo) throws Exception {
-        AbstractMeasurable<?> measurableToCompare = (AbstractMeasurable<?>) compareTo;
-        AbstractMeasurable<?> convertedValue = (AbstractMeasurable<?>) measurableToCompare.convert(this.unit);
+        Measurement<?> measurableToCompare = (Measurement<?>) compareTo;
+        Measurement<?> convertedValue = (Measurement<?>) measurableToCompare.convert(this.unit);
         return Double.compare(this.value, convertedValue.value);
     }
 
@@ -71,7 +71,7 @@ public abstract class AbstractMeasurable<T extends Enum<T>> implements Measurabl
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        AbstractMeasurable<?> that = (AbstractMeasurable<?>) obj;
+        Measurement<?> that = (Measurement<?>) obj;
         return Double.compare(that.value, value) == 0 && unit.equals(that.unit);
     }
 

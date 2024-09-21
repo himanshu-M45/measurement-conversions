@@ -4,7 +4,7 @@ import org.example.enums.LengthUnit;
 import org.example.interfaces.Measurable;
 
 
-public class Length extends AbstractMeasurable<LengthUnit> {
+public class Length extends Measurement<LengthUnit> {
     public Length(double value, LengthUnit unit) throws IllegalAccessException {
         super(value, unit);
     }

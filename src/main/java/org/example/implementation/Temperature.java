@@ -3,9 +3,7 @@ package org.example.implementation;
 import org.example.enums.TemperatureUnit;
 import org.example.interfaces.Measurable;
 
-import java.util.Objects;
-
-public class Temperature extends AbstractMeasurable<TemperatureUnit> {
+public class Temperature extends Measurement<TemperatureUnit> {
     public Temperature(double value, TemperatureUnit unit) throws IllegalAccessException{
         super(value, unit);
     }

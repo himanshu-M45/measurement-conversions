@@ -3,7 +3,7 @@ package org.example.implementation;
 import org.example.enums.WeightUnit;
 import org.example.interfaces.Measurable;
 
-public class Weight extends AbstractMeasurable<WeightUnit> {
+public class Weight extends Measurement<WeightUnit> {
     public Weight(double value, WeightUnit unit) throws IllegalAccessException {
         super(value, unit);
     }
