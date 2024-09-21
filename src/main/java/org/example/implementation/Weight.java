@@ -39,11 +39,7 @@ public class Weight extends AbstractMeasurable<WeightUnit> {
     }
 
     @Override
-    protected Measurable createInstance(double value, WeightUnit unit) {
-        try {
-            return new Weight(value, unit);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+    protected Measurable createInstance(double value, WeightUnit unit) throws IllegalAccessException {
+        return new Weight(value, unit);
     }
 }

@@ -1,7 +1,6 @@
 package org.example.implementation;
 
 import org.example.enums.TemperatureUnit;
-import org.example.enums.VolumeUnit;
 import org.example.interfaces.Measurable;
 
 import java.util.Objects;
@@ -47,11 +46,7 @@ public class Temperature extends AbstractMeasurable<TemperatureUnit> {
     }
 
     @Override
-    protected Measurable createInstance(double value, TemperatureUnit unit) {
-        try {
-            return new Temperature(value, unit);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+    protected Measurable createInstance(double value, TemperatureUnit unit) throws IllegalAccessException {
+        return new Temperature(value, unit);
     }
 }

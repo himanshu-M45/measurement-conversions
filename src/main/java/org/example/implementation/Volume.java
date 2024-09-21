@@ -42,11 +42,7 @@ public class Volume extends AbstractMeasurable<VolumeUnit> {
     }
 
     @Override
-    protected Measurable createInstance(double value, VolumeUnit unit) {
-        try {
-            return new Volume(value, unit);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+    protected Measurable createInstance(double value, VolumeUnit unit) throws IllegalAccessException {
+        return new Volume(value, unit);
     }
 }

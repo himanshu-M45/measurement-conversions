@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.enums.VolumeUnit;
+import org.example.enums.WeightUnit;
 import org.example.implementation.Volume;
 import org.example.interfaces.Measurable;
 import org.junit.jupiter.api.Test;
@@ -172,4 +173,13 @@ class VolumeTest {
         assertEquals(expected, actual);
     }
 
+    // ------------------------------- unit test to check error while using incompatible unit types -------------------------------
+    @Test
+    void testConvertWithIncompatibleUnitThrowsExceptionForVolume() throws Exception {
+        Volume liter = new Volume(1.0, VolumeUnit.L);
+
+        assertThrows(ClassCastException.class, () -> {
+            liter.convert(WeightUnit.KG);
+        });
+    }
 }

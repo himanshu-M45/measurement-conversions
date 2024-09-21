@@ -40,12 +40,8 @@ public class Length extends AbstractMeasurable<LengthUnit> {
     }
 
     @Override
-    protected Measurable createInstance(double value, LengthUnit unit) {
-        try {
-            return new Length(value, unit);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+    protected Measurable createInstance(double value, LengthUnit unit) throws IllegalAccessException {
+        return new Length(value, unit);
     }
 
 }

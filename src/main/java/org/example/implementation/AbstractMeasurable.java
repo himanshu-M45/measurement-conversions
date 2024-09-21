@@ -45,7 +45,7 @@ public abstract class AbstractMeasurable<T extends Enum<T>> implements Measurabl
         return Double.compare(this.value, convertedValue.value);
     }
 
-    protected abstract Measurable createInstance(double value, T unit);
+    protected abstract Measurable createInstance(double value, T unit) throws IllegalAccessException;
 
     protected abstract double convertToBaseUnit(double value, T unit);
 
@@ -54,7 +54,7 @@ public abstract class AbstractMeasurable<T extends Enum<T>> implements Measurabl
     /*
             Unchecked cast: 'java. lang. Enum<capture<?>>' to 'T'
             Reason: The warning "Unchecked cast: 'java.lang.Enum<capture<#comment #comment="?"></#comment>>'
-            to 'T'" occurs because the cast from `Enum<#comment #comment="?"></#comment>toTis not type-safe.
+            to 'T'" occurs because the cast from `Enum<#comment #comment="?"></#comment>to T is not type-safe.
             To resolve this, you can use a type-safe approach by adding a method to theAbstractMeasurable`
             class that performs the cast safely.  Here's how you can modify the convert method to avoid the
             unchecked cast warning:

@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.enums.TemperatureUnit;
+import org.example.enums.VolumeUnit;
 import org.example.implementation.Temperature;
 import org.junit.jupiter.api.Test;
 
@@ -77,4 +78,13 @@ class TemperatureTest {
         });
     }
 
+    // ------------------------------- unit test to check error while using incompatible unit types -------------------------------
+    @Test
+    void testConvertWithIncompatibleUnitThrowsException() throws Exception {
+        Temperature celsius = new Temperature(10.0, TemperatureUnit.CELSIUS);
+
+        assertThrows(ClassCastException.class, () -> {
+            celsius.convert(VolumeUnit.L);
+        });
+    }
 }

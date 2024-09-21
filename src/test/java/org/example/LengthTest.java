@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.enums.TemperatureUnit;
 import org.example.implementation.Length;
 import org.example.enums.LengthUnit;
 import org.example.interfaces.Measurable;
@@ -121,4 +122,13 @@ class LengthTest {
         assertEquals(expected, actual);
     }
 
+    // ------------------------------- unit test to check error while using incompatible unit types -------------------------------
+    @Test
+    void testConvertWithIncompatibleUnitThrowsExceptionForVolume() throws Exception {
+        Length centimeter = new Length(1.0, LengthUnit.CM);
+
+        assertThrows(ClassCastException.class, () -> {
+            centimeter.convert(TemperatureUnit.CELSIUS);
+        });
+    }
 }

@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.enums.VolumeUnit;
 import org.example.enums.WeightUnit;
 import org.example.implementation.Weight;
 import org.example.interfaces.Measurable;
@@ -97,4 +98,13 @@ class WeightTest {
         assertEquals(expected, actual);
     }
 
+    // ------------------------------- unit test to check error while using incompatible unit types -------------------------------
+    @Test
+    void testConvertWithIncompatibleUnitThrowsException() throws Exception {
+        Weight kilogram = new Weight(1.0, WeightUnit.KG);
+
+        assertThrows(ClassCastException.class, () -> {
+            kilogram.convert(VolumeUnit.L);
+        });
+    }
 }
