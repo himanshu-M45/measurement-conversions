@@ -23,9 +23,9 @@ class VolumeTest {
     @Test
     void testTwoThousandMillilitersToTwoLiters() throws Exception {
         Volume expected = new Volume(2.0, VolumeUnit.L);
-        Volume Volume = new Volume(2000.0, VolumeUnit.ML);
+        Volume volume = new Volume(2000.0, VolumeUnit.ML);
 
-        Volume actual = Volume.convert(VolumeUnit.L);
+        Volume actual = volume.convert(VolumeUnit.L);
 
         assertEquals(expected, actual);
     }
@@ -33,9 +33,9 @@ class VolumeTest {
     @Test
     void testOneLiterToTenDeciliters() throws Exception {
         Volume expected = new Volume(10.0, VolumeUnit.DL);
-        Volume Volume = new Volume(1.0, VolumeUnit.L);
+        Volume volume = new Volume(1.0, VolumeUnit.L);
 
-        Volume actual = Volume.convert(VolumeUnit.DL);
+        Volume actual = volume.convert(VolumeUnit.DL);
 
         assertEquals(expected, actual);
     }
@@ -43,9 +43,9 @@ class VolumeTest {
     @Test
     void testOneThousandLiterToOneKiloliters() throws Exception {
         Volume expected = new Volume(1.0, VolumeUnit.KL);
-        Volume Volume = new Volume(1000.0, VolumeUnit.L);
+        Volume volume = new Volume(1000.0, VolumeUnit.L);
 
-        Volume actual = Volume.convert(VolumeUnit.KL);
+        Volume actual = volume.convert(VolumeUnit.KL);
 
         assertEquals(expected, actual);
     }
@@ -53,9 +53,9 @@ class VolumeTest {
     @Test
     void testOneLiterToOneHundredCentiliters() throws Exception {
         Volume expected = new Volume(100.0, VolumeUnit.CL);
-        Volume Volume = new Volume(1.0, VolumeUnit.L);
+        Volume volume = new Volume(1.0, VolumeUnit.L);
 
-        Volume actual = Volume.convert(VolumeUnit.CL);
+        Volume actual = volume.convert(VolumeUnit.CL);
 
         assertEquals(expected, actual);
     }
@@ -63,9 +63,9 @@ class VolumeTest {
     @Test
     void testOneHundredCentiliterToOneThousandMilliliters() throws Exception {
         Volume expected = new Volume(1000.0, VolumeUnit.ML);
-        Volume Volume = new Volume(100.0, VolumeUnit.CL);
+        Volume volume = new Volume(100.0, VolumeUnit.CL);
 
-        Volume actual = Volume.convert(VolumeUnit.ML);
+        Volume actual = volume.convert(VolumeUnit.ML);
 
         assertEquals(expected, actual);
     }
@@ -73,9 +73,9 @@ class VolumeTest {
     @Test
     void testOneHundredDeciliterToOneThousandCentiliter() throws Exception {
         Volume expected = new Volume(1000.0, VolumeUnit.CL);
-        Volume Volume = new Volume(100.0, VolumeUnit.DL);
+        Volume volume = new Volume(100.0, VolumeUnit.DL);
 
-        Volume actual = Volume.convert(VolumeUnit.CL);
+        Volume actual = volume.convert(VolumeUnit.CL);
 
         assertEquals(expected, actual);
     }
@@ -83,9 +83,9 @@ class VolumeTest {
     @Test
     void testFiveKilolitersToFiveLacCentiliter() throws Exception {
         Volume expected = new Volume(500000.0, VolumeUnit.CL);
-        Volume Volume = new Volume(5.0, VolumeUnit.KL);
+        Volume volume = new Volume(5.0, VolumeUnit.KL);
 
-        Volume actual = Volume.convert(VolumeUnit.CL);
+        Volume actual = volume.convert(VolumeUnit.CL);
 
         assertEquals(expected, actual);
     }
@@ -93,16 +93,16 @@ class VolumeTest {
     @Test
     void testFiveLacCentilitersToFiveThousandLiter() throws Exception {
         Volume expected = new Volume(5000.0, VolumeUnit.L);
-        Volume Volume = new Volume(500000.0, VolumeUnit.CL);
+        Volume volume = new Volume(500000.0, VolumeUnit.CL);
 
-        Volume actual = Volume.convert(VolumeUnit.L);
+        Volume actual = volume.convert(VolumeUnit.L);
 
         assertEquals(expected, actual);
     }
 
     @Test
     void testInputCannotBeNegative() throws IllegalAccessException {
-        assertThrows(IllegalAccessException.class, () -> new Volume(-9.0,  VolumeUnit.L));
+        assertThrows(IllegalAccessException.class, () -> new Volume(-9.0, VolumeUnit.L));
     }
 
     // ------------------------------- unit test to add two units -------------------------------

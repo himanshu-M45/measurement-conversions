@@ -54,7 +54,7 @@ public abstract class Measurement<T extends Enum<T>> implements Measurable {
         } catch (Exception e) {
             throw new RuntimeException("Error converting from base unit", e);
         }
-    };
+    }
 
     private double convertFromBaseUnit(double value, T unit) {
         try {

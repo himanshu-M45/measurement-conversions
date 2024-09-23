@@ -10,7 +10,7 @@ public class Weight extends Measurement<WeightUnit> {
 
     @Override
     public Weight convert(Enum<?> toUnit) throws Exception {
-        return(Weight) super.convert(toUnit);
+        return (Weight) super.convert(toUnit);
     }
 
     @Override

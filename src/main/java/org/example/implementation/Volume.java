@@ -10,7 +10,7 @@ public class Volume extends Measurement<VolumeUnit> {
 
     @Override
     public Volume convert(Enum<?> toUnit) throws Exception {
-        return(Volume) super.convert(toUnit);
+        return (Volume) super.convert(toUnit);
     }
 
     @Override

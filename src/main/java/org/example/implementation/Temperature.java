@@ -4,7 +4,7 @@ import org.example.enums.TemperatureUnit;
 import org.example.interfaces.Measurable;
 
 public class Temperature extends Measurement<TemperatureUnit> {
-    public Temperature(double value, TemperatureUnit unit) throws IllegalAccessException{
+    public Temperature(double value, TemperatureUnit unit) throws IllegalAccessException {
         super(value, unit);
     }
 
