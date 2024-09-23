@@ -11,17 +11,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class VolumeTest {
     // ------------------------------- unit test to convert units -------------------------------
     @Test
-    void testOneLiterToOneThousandMilliliters() throws Exception {
+    void testOneLiterToPointZeroZeroOneKiloliters() throws Exception {
         Volume expected = new Volume(0.001, VolumeUnit.KL);
-        Volume Volume = new Volume(1.0, VolumeUnit.L);
+        Volume volume = new Volume(1.0, VolumeUnit.L);
 
-        Volume actual = Volume.convert(VolumeUnit.KL);
+        Volume actual = volume.convert(VolumeUnit.KL);
 
         assertEquals(expected, actual);
     }
 
     @Test
-    void testTwoThousandMillilitersToOneLiters() throws Exception {
+    void testTwoThousandMillilitersToTwoLiters() throws Exception {
         Volume expected = new Volume(2.0, VolumeUnit.L);
         Volume Volume = new Volume(2000.0, VolumeUnit.ML);
 

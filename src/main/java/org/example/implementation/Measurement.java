@@ -3,6 +3,7 @@ package org.example.implementation;
 import org.example.enums.TemperatureUnit;
 import org.example.interfaces.Measurable;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
 
 public abstract class Measurement<T extends Enum<T>> implements Measurable {
@@ -47,9 +48,21 @@ public abstract class Measurement<T extends Enum<T>> implements Measurable {
 
     protected abstract Measurable createInstance(double value, T unit) throws IllegalAccessException;
 
-    protected abstract double convertToBaseUnit(double value, T unit);
+    private double convertToBaseUnit(double value, T unit) {
+        try {
+            return (double) unit.getClass().getMethod("toBaseUnit").invoke(unit) * value;
+        } catch (Exception e) {
+            throw new RuntimeException("Error converting from base unit", e);
+        }
+    };
 
-    protected abstract double convertFromBaseUnit(double value, T unit);
+    private double convertFromBaseUnit(double value, T unit) {
+        try {
+            return (double) unit.getClass().getMethod("fromBaseUnit").invoke(unit) * value;
+        } catch (Exception e) {
+            throw new RuntimeException("Error converting from base unit", e);
+        }
+    }
 
     /*
             Unchecked cast: 'java. lang. Enum<capture<?>>' to 'T'

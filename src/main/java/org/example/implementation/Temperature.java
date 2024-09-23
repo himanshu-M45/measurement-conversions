@@ -19,11 +19,6 @@ public class Temperature extends Measurement<TemperatureUnit> {
     }
 
     @Override
-    public int compare(Measurable compareTo) throws Exception {
-        return super.compare(compareTo);
-    }
-
-    @Override
     public Measurable add(Measurable additionValue) {
         throw new UnsupportedOperationException("Addition is not supported for Temperature");
     }
@@ -31,16 +26,6 @@ public class Temperature extends Measurement<TemperatureUnit> {
     @Override
     public Measurable sub(Measurable subtractionValue) {
         throw new UnsupportedOperationException("Subtraction is not supported for Temperature");
-    }
-
-    @Override
-    protected double convertToBaseUnit(double value, TemperatureUnit unit) {
-        return value * unit.toBaseUnit();
-    }
-
-    @Override
-    protected double convertFromBaseUnit(double value, TemperatureUnit unit) {
-        return value * unit.fromBaseUnit();
     }
 
     @Override
