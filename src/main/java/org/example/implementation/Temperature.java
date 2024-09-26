@@ -11,7 +11,6 @@ public class Temperature extends Measurement<TemperatureUnit> {
     @Override
     public Temperature convert(Enum<?> toUnit) throws Exception {
         TemperatureUnit targetUnit = (TemperatureUnit) toUnit; // extract target unit
-
         if (targetUnit == TemperatureUnit.CELSIUS) {
             return new Temperature((this.value - targetUnit.constant) * 5 / 9, targetUnit); // F -> C
         }

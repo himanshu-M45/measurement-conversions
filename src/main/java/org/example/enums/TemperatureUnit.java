@@ -1,21 +1,24 @@
 package org.example.enums;
 
 public enum TemperatureUnit {
-    CELSIUS(1.0),
-    FAHRENHEIT(1.0);
+    CELSIUS() {
+        public double toBaseUnit(double value) {
+            return value;
+        }
 
-    private final double conversionFactor;
+        public double fromBaseUnit(double value) {
+            return value;
+        }
+    },
+    FAHRENHEIT() {
+        public double toBaseUnit(double value) {
+            return (value - constant) * 5 / 9;
+        }
+
+        public double fromBaseUnit(double value) {
+            return (value * 9 / 5) + constant;
+        }
+    };
+
     public final int constant = 32;
-
-    TemperatureUnit(double conversionFactor) {
-        this.conversionFactor = conversionFactor;
-    }
-
-    public double toBaseUnit() {
-        return conversionFactor;
-    }
-
-    public double fromBaseUnit() {
-        return 1 / conversionFactor;
-    }
 }

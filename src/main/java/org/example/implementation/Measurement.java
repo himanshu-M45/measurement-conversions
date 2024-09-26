@@ -48,20 +48,12 @@ public abstract class Measurement<T extends Enum<T>> implements Measurable {
 
     protected abstract Measurable createInstance(double value, T unit) throws IllegalAccessException;
 
-    private double convertToBaseUnit(double value, T unit) {
-        try {
-            return (double) unit.getClass().getMethod("toBaseUnit").invoke(unit) * value;
-        } catch (Exception e) {
-            throw new RuntimeException("Error converting from base unit", e);
-        }
+    private double convertToBaseUnit(double value, T unit) throws Exception {
+        return (double) unit.getClass().getMethod("toBaseUnit").invoke(unit) * value;
     }
 
-    private double convertFromBaseUnit(double value, T unit) {
-        try {
-            return (double) unit.getClass().getMethod("fromBaseUnit").invoke(unit) * value;
-        } catch (Exception e) {
-            throw new RuntimeException("Error converting from base unit", e);
-        }
+    private double convertFromBaseUnit(double value, T unit) throws Exception {
+        return (double) unit.getClass().getMethod("fromBaseUnit").invoke(unit) * value;
     }
 
     /*
@@ -73,7 +65,7 @@ public abstract class Measurement<T extends Enum<T>> implements Measurable {
             unchecked cast warning:
                 1. Add a method to safely cast Enum<?> to T.
                 2. Use this method in the convert method.
-        */
+     */
     @SuppressWarnings("unchecked")
     private T castToGenericType(Enum<?> toUnit) {
         return (T) toUnit;
